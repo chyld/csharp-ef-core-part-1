@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 
 namespace lib
@@ -7,7 +9,10 @@ namespace lib
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<Post> Posts { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite($"Data Source=app.db");
+    {
+      var dir = Directory.GetCurrentDirectory();
+      Console.WriteLine($"dir: {dir}");
+      options.UseSqlite($"Data Source=app.db");
+    }
   }
 }
-
