@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace lib
 {
@@ -13,6 +14,7 @@ namespace lib
       var basedir = System.AppContext.BaseDirectory;
       var solndir = Directory.GetParent(basedir).Parent.Parent.Parent.Parent;
       options.UseSqlite($"Data Source={solndir.FullName}/db/app.db");
+      options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
     }
   }
 }
