@@ -10,9 +10,9 @@ namespace lib
     public DbSet<Post> Posts { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-      var dir = Directory.GetCurrentDirectory();
-      Console.WriteLine($"dir: {dir}");
-      options.UseSqlite($"Data Source=app.db");
+      var basedir = System.AppContext.BaseDirectory;
+      var solndir = Directory.GetParent(basedir).Parent.Parent.Parent.Parent;
+      options.UseSqlite($"Data Source={solndir.FullName}/db/app.db");
     }
   }
 }
